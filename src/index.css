@@ -2,24 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
-  }
-  body {
+}
+
+body {
     font-family: "PingFang TC", "PingFang SC", "Microsoft JhengHei", "Helvetica Neue", Helvetica, sans-serif;
 }
 
-  
-  .map-container {
-    padding: 16px;
+
+.map-container {
+    padding-left: 16px;
+    padding-right: 16px;
+    /* height: 50vh; */
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .navbar {
-    background-color: #d32f2f;
+}
+
+.navbar {
+    /* background-color: #d32f2f; */
     color: white;
     padding: 16px;
     display: flex;
@@ -27,9 +31,82 @@ html, body {
     position: fixed;
     bottom: 0;
     width: 100%;
-  }
-  
-  .navbar div {
+}
+
+.navbar div {
     text-align: center;
-  }
-  
+}
+
+
+/* Chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: 100vh; */
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+    gap: 0px;
+}
+
+/* Chatbox styles */
+.chatbox {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 16px;
+}
+
+.user-message,
+.ai-message {
+    margin-bottom: 8px;
+}
+
+.message-bubble {
+    padding: 12px 16px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+/* User message */
+.user-bubble {
+    background-color: #71C5D5;
+    color: white;
+}
+
+/* AI message */
+.ai-bubble {
+    background-color: #DBF1F5;
+    color: #22474E;
+    align-self: flex-start;
+}
+
+/* Input bar */
+.input-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-text {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.input-text:focus {
+    outline: none;
+    border-color: #ddd;
+}
+
+.send-button {
+    background-color: #71C5D5;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
