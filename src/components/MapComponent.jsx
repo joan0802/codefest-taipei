@@ -3,6 +3,9 @@ import React, {useEffect, useState} from "react";
 import {GoogleMap, LoadScript, Marker, InfoWindow} from "@react-google-maps/api";
 import {dataList} from './Response';
 import FilterComponent from './FilterComponent';
+import { FaSearch } from "react-icons/fa";
+
+const googleMapsApiKey="AIzaSyCxVDVlIHLV_qsVtIBkm879cNWsi26PJDs";
 
 const getMarkerIcon = (score) => {
   let color;
@@ -31,10 +34,10 @@ const getMarkerIcon = (score) => {
 };
 
 const mapContainerStyle = {
-    width: "100vw", 
+    width: "100vw",
     height: "85vh",
 };
-  
+
 
 const center = {
   lat: 25.0330, // 台北經度
@@ -45,6 +48,33 @@ function MapComponent() {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [places, setPlaces] = useState([]);
   const [filter, setFilter] = useState({ types: [], grades: [] });
+  const [searchVisible, setSearchVisible] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [mapCenter, setMapCenter] = useState(center);
+
+
+  const handleSearch = async () => {
+    if (!searchInput) return;
+
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+        searchInput
+    )}&key=${googleMapsApiKey}`;
+
+    try {
+      const response = await fetch(geocodeUrl);
+      const data = await response.json();
+      if (data.status === "OK") {
+        const location = data.results[0].geometry.location;
+        setMapCenter({ lat: location.lat, lng: location.lng });
+      } else {
+        alert("地址未找到");
+      }
+    } catch (error) {
+      console.error("Geocode error:", error);
+    }
+  };
+
+
 
   useEffect(() => {
     const filteredPlaces = dataList.filter((place) => {
@@ -65,13 +95,44 @@ function MapComponent() {
   return (
     <div className="flex flex-col">
       <FilterComponent setFilter={setFilter}/>
+      <div className="relative">
+        <button
+            onClick={() => setSearchVisible(!searchVisible)}
+            className="absolute bg-white p-2 rounded-full shadow-md top-4 left-16 z-10"
+        >
+          <FaSearch size={24} />
+        </button>
+
+        {searchVisible && (
+            <div className="absolute top-14 left-4 z-10 bg-white p-4 rounded-lg shadow-md w-80">
+              <input
+                  type="text"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder="輸入地址"
+                  className="border p-2 rounded-lg focus:outline-none"
+              />
+              <button
+                  onClick={handleSearch}
+                  className="bg-blue-500 text-white p-2 rounded-lg ml-2"
+              >
+                搜尋
+              </button>
+            </div>
+        )}
+      </div>
       <div className="flex-grow relative">
-        <LoadScript googleMapsApiKey="AIzaSyCxVDVlIHLV_qsVtIBkm879cNWsi26PJDs" libraries={["places"]}>
+        <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={["places"]}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            center={center}
+            center={mapCenter}
             zoom={12}
             onLoad={handleLoadMap}
+            options={{
+              mapTypeControl: false,
+              streetViewControl: false,
+              fullscreenControl: false,
+            }}
           >
             {places.map((place) => (
               <Marker
