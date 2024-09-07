@@ -6,7 +6,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
             {/* Map Tab */}
             <button className="w-full" onClick={() => setActiveTab('map')}>
                 <ToolButton 
-                    icon="/location.png" 
+                    icon="/map_location.png" 
                     text="托嬰地圖" 
                     active={activeTab === 'map'} 
                 />
@@ -24,7 +24,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
             {/* Playground Tab */}
             <button className="w-full" onClick={() => setActiveTab('playground')}>
                 <ToolButton 
-                    icon="/family.png" 
+                    icon="/family_icon.png" 
                     text="親子放電區" 
                     active={activeTab === 'playground'} 
                 />
