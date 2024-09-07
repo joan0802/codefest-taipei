@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './Navbar';
+import ActivityCards from './ActivityCards';
 import { useState } from 'react';
 import MapComponent from "./components/MapComponent";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
@@ -20,7 +21,7 @@ export default function App() {
             </div>}
             {activeTab === 'playground' && <div className="playground-container">
                 <div>
-
+                <ActivityCards />
                 </div>
             </div>}
             <Navbar className='min-h-[8vh]' activeTab={activeTab} setActiveTab={setActiveTab} />
