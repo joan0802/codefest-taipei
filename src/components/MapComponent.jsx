@@ -32,7 +32,7 @@ const getMarkerIcon = (score) => {
 
 const mapContainerStyle = {
     width: "100vw", 
-    height: "85vh",
+    height: "92vh",
 };
   
 

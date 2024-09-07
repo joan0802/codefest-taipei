@@ -45,8 +45,8 @@ export default function ChatComponent() {
     };
 
     return (
-        <div className="chat-container">
-            <div className='overflow-y-auto h-[73vh] mb-3'>
+        <div className="h-full p-[1.5rem] flex flex-col justify-between">
+            <div className='overflow-y-auto h-[80vh] mb-3'>
                 <MessageList messages={messages.filter(msg => msg.role !== 'system')} />
             </div>
             <InputBar
