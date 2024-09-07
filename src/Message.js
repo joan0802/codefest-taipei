@@ -14,7 +14,7 @@ export default function Message({ role, content }) {
             </div>
             }
             {!isUser && <div className='mt-2 message-bubble ai-bubble'>
-                <strong>專家: </strong>
+                <strong>育嬰AI助理: </strong>
                 {content}
             </div>}
 

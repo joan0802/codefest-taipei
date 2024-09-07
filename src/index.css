@@ -39,20 +39,19 @@ body {
 
 
 /* Chat container */
-.chat-container {
+/* .chat-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* height: 100vh; */
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 16px;
     gap: 0px;
-}
+} */
 
 /* Chatbox styles */
 .chatbox {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     overflow-y: auto;
     margin-bottom: 16px;
 }
