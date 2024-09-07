@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col justify-between h-screen">
-      <div className="flex-grow">
+      <div className="">
         <h1 className="text-3xl text-center text-[#468D9B] mt-4">
           媽咪育嬰指南
         </h1>
@@ -23,7 +23,7 @@ export default function App() {
       </div>
 
       {/* 將 activeTab 和 setActiveTab 傳遞給 Navbar */}
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab}/>
     </div>
   );
 }

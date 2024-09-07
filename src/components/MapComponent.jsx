@@ -1,7 +1,8 @@
 // src/components/MapComponent.js
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {GoogleMap, LoadScript, Marker, InfoWindow} from "@react-google-maps/api";
 import {dataList} from './Response';
+import FilterComponent from './FilterComponent';
 
 const getMarkerIcon = (score) => {
   let color;
@@ -41,6 +42,16 @@ const center = {
 function MapComponent() {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [places, setPlaces] = useState([]);
+  const [filter, setFilter] = useState({ types: [], grades: [] });
+
+  useEffect(() => {
+    const filteredPlaces = dataList.filter((place) => {
+      const matchesType = filter.types.length === 0 || filter.types.includes(place.attributes.teamYN);
+      const matchesGrade = filter.grades.length === 0 || filter.grades.includes(place.attributes.score);
+      return matchesType && matchesGrade;
+    });
+    setPlaces(filteredPlaces.map(place => place.attributes));
+  }, [filter]);
 
   const handleLoadMap = () => {
     dataList.forEach((place) => {
@@ -49,49 +60,55 @@ function MapComponent() {
 
   };
 
-  return (<LoadScript googleMapsApiKey="AIzaSyCxVDVlIHLV_qsVtIBkm879cNWsi26PJDs" libraries={["places"]}>
-    <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={12}
-        onLoad={handleLoadMap}
-    >
-      {places.map((place) => (
-          <Marker
-              key={place.OBJECTID}
-              position={{
-                lat: place.lat,
-                lng: place.lng,
-              }}
-              onClick={() => {
-                setSelectedPlace(place);
-              }}
-              icon={getMarkerIcon(place.score)}
-          />
-      ))}
-
-      {selectedPlace && (
-          <InfoWindow
-              position={{
-                lat: selectedPlace.lat,
-                lng: selectedPlace.lng,
-              }}
-              onCloseClick={() => {
-                setSelectedPlace(null);
-              }}
+  return (
+    <div className="flex flex-col h-screen">
+      <FilterComponent setFilter={setFilter}/>
+      <div className="flex-grow relative">
+        <LoadScript googleMapsApiKey="AIzaSyCxVDVlIHLV_qsVtIBkm879cNWsi26PJDs" libraries={["places"]}>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={center}
+            zoom={12}
+            onLoad={handleLoadMap}
           >
-            <div className="line-height-5">
-              <h2 className="font-bold text-center">{selectedPlace.name}</h2>
-              <p><strong className="font-bold">地址:</strong> {selectedPlace.address}</p>
-              <p><strong className="font-bold">電話:</strong> {selectedPlace.tel}</p>
-              <p><strong className="font-bold">評分:</strong> {selectedPlace.score}</p>
-              <p><strong className="font-bold">區域:</strong> {selectedPlace.town}</p>
-              <p><strong className="font-bold">收費資訊:</strong> {selectedPlace.charge}</p>
-            </div>
-          </InfoWindow>
-      )}
-    </GoogleMap>
-  </LoadScript>);
+            {places.map((place) => (
+              <Marker
+                key={place.OBJECTID}
+                position={{
+                  lat: place.lat,
+                  lng: place.lng,
+                }}
+                onClick={() => {
+                  setSelectedPlace(place);
+                }}
+                icon={getMarkerIcon(place.score)}
+              />
+            ))}
+
+            {selectedPlace && (
+              <InfoWindow
+                position={{
+                  lat: selectedPlace.lat,
+                  lng: selectedPlace.lng,
+                }}
+                onCloseClick={() => {
+                  setSelectedPlace(null);
+                }}
+              >
+                <div className="line-height-5">
+                  <h2 className="font-bold text-center">{selectedPlace.name}</h2>
+                  <p><strong className="font-bold">地址:</strong> {selectedPlace.address}</p>
+                  <p><strong className="font-bold">電話:</strong> {selectedPlace.tel}</p>
+                  <p><strong className="font-bold">評分:</strong> {selectedPlace.score}</p>
+                  <p><strong className="font-bold">區域:</strong> {selectedPlace.town}</p>
+                  <p><strong className="font-bold">收費資訊:</strong> {selectedPlace.charge}</p>
+                </div>
+              </InfoWindow>
+            )}
+          </GoogleMap>
+      </LoadScript>
+    </div>
+  </div>);
 }
 
 export default MapComponent;
