@@ -10,7 +10,7 @@ function ActivityCard({ activity }) {
     const handleExpandClick = () => {
         setExpand(!expand);
     };
-    const mediaIsImage = activity.media === "image" ? true : false;
+    const mediaIsImage = activity.media === "image" ? true : activity.media_url === "" ? true : false;
     return (
         <Card
           sx={{
@@ -27,12 +27,12 @@ function ActivityCard({ activity }) {
               component="img"
               alt="poster"
               sx={{ height: 200 }}
-              image={activity.image !== "" ? activity.image : "default.jpg"}
+              image={activity.media_url !== "" ? activity.media_url : "default.jpg"}
             />
           ) : (
             <iframe
               title="video"
-              src={activity.video}
+              src={activity.media_url}
               width="100%"
               height="200"
               frameBorder="0"
@@ -42,10 +42,10 @@ function ActivityCard({ activity }) {
 
           <CardContent>
             <Typography gutterBottom variant="h5" component="div" sx={{ marginTop: "10px" }}>
-              {activity.name}
+              {activity.title}
             </Typography>
             <Typography variant="body2" sx={{ marginBottom: '10px' }}>
-              時間：{activity.starttime} <br></br>
+              時間：{activity.date} <br></br>
               地點：{activity.location}
             </Typography>
             <Typography variant="body2" sx={{ maxHeight: expand ? 'none' : '43px', overflow: 'hidden' }}>
