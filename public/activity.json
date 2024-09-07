@@ -7,7 +7,7 @@
         "endtime": "2024-09-14 15:00:00",
         "location": "臺北市立天文科學教育館展示場二樓兒童區",
         "media": "image",
-        "image": "activityPicture/default.jpg",
+        "image": "",
         "video": ""
     },
     {
@@ -19,7 +19,7 @@
         "location": "松山親子館",
         "media": "video",
         "image": "",
-        "video": "https://youtu.be/CO-KWkZQmsk"
+        "video": "https://www.youtube.com/embed/CO-KWkZQmsk"
     },
     {
         "id": 3,
@@ -28,8 +28,8 @@
         "starttime": "2024-09-21 09:00:00",
         "endtime": "2024-09-21 12:00:00",
         "location": "臺北天文館",
-        "media": "picture",
-        "image": "activityPicture/default.jpg",
+        "media": "image",
+        "image": "",
         "video": ""
     },
     {
@@ -39,7 +39,7 @@
         "starttime": "2024-09-14 14:00:00",
         "endtime": "2024-09-14 18:00:00",
         "location": "捷運大安森林公園站陽光大廳",
-        "media": "picture",
+        "media": "image",
         "image": "https://www-ws.gov.taipei/001/Upload/405/relpic/31811/9272060/2ed53dcc-a3c4-4942-8fe6-cd9db3bcba7f.jpg",
         "video": ""
     }

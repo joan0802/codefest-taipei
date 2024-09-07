@@ -10,6 +10,7 @@ function ActivityCard({ activity }) {
     const handleExpandClick = () => {
         setExpand(!expand);
     };
+    const mediaIsImage = activity.media === "image" ? true : false;
     return (
         <Card
           sx={{
@@ -20,12 +21,25 @@ function ActivityCard({ activity }) {
           }}
           key={activity.id}
           >
-          <CardMedia
-            component="img"
-            alt="poster"
-            sx={{ height: 200 }}
-            image="default.jpg"
-          />
+        
+          {mediaIsImage ? (
+            <CardMedia
+              component="img"
+              alt="poster"
+              sx={{ height: 200 }}
+              image={activity.image !== "" ? activity.image : "default.jpg"}
+            />
+          ) : (
+            <iframe
+              title="video"
+              src={activity.video}
+              width="100%"
+              height="200"
+              frameBorder="0"
+              allowFullScreen
+            />
+          )}
+
           <CardContent>
             <Typography gutterBottom variant="h5" component="div" sx={{ marginTop: "10px" }}>
               {activity.name}
