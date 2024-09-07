@@ -11,15 +11,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 export default function App({ children }) {
     const [activeTab, setActiveTab] = useState('map');
-    // const [dialogOpen, setDialogOpen] = useState(false);
-
-    // const handleDialogOpen = () => {
-    //     setDialogOpen(true);
-    // };
-
-    // const handleDialogClose = () => {
-    //     setDialogOpen(false);
-    // };
+    const [refresh, setRefresh] = useState(false);
+    const handleFormSubmit = () => {
+        setRefresh(prev => !prev);
+    }
 
     return (
         <div className="flex flex-col justify-between gap-0 h-screen">
@@ -33,25 +28,13 @@ export default function App({ children }) {
             </div>}
             {activeTab === 'playground' && <div className="playground-container">
                 <div>
-                    <ActivityCards />
+                    <ActivityCards refresh={refresh} />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         {children}
-                        <FormDialog />
+                        <FormDialog
+                            onFormSubnit={handleFormSubmit}
+                        />
                     </LocalizationProvider>
-                    
-                    {/* <Fab 
-                        size = "large"
-                        style = {{ 
-                            position: 'fixed', 
-                            bottom: '100px', 
-                            right: '20px',
-                            backgroundColor: "#71C5D5" 
-                        }} 
-                        onclick = {handleDialogOpen}
-                    >
-                        <AddIcon style={{ color: "#EDF8FA" }} />
-                    </Fab>
-                    <FormDialog open={dialogOpen} onClose={handleDialogClose} /> */}
                 </div>
             </div>}
             <Navbar className='min-h-[8vh]' activeTab={activeTab} setActiveTab={setActiveTab} />
