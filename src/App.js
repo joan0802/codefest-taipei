@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './Navbar';
+import ActivityCards from './ActivityCards';
 import { useState } from 'react';
 import MapComponent from "./components/MapComponent";
 import ChatComponent from './ChatComponent';
@@ -18,14 +19,11 @@ export default function App() {
                     {activeTab === 'map' && <div className="map-container">
                         <MapComponent />
                     </div>}
-                    {activeTab === 'playground' && <div className="playground-container">兒童遊樂場顯示在這裡</div>}
                     {activeTab === 'chatbot' && <div>
                         <ChatComponent />
                     </div>}
                     {activeTab === 'playground' && <div className="playground-container">
-                        <div>
-
-                        </div>
+                        <ActivityCards />
                     </div>}
                 </div>
             </div>
