@@ -31,8 +31,10 @@ const getMarkerIcon = (score) => {
 };
 
 const mapContainerStyle = {
-  width: "100vw", height: "100vh",
+    width: "100vw", 
+    height: "85vh",
 };
+  
 
 const center = {
   lat: 25.0330, // 台北經度
@@ -61,7 +63,7 @@ function MapComponent() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col">
       <FilterComponent setFilter={setFilter}/>
       <div className="flex-grow relative">
         <LoadScript googleMapsApiKey="AIzaSyCxVDVlIHLV_qsVtIBkm879cNWsi26PJDs" libraries={["places"]}>
