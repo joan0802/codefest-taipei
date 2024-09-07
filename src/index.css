@@ -42,12 +42,13 @@ body {
     flex-direction: column;
     justify-content: space-between;
     /* height: 100vh; */
-    padding: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 /* Chatbox styles */
 .chatbox {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     overflow-y: auto;
     margin-bottom: 16px;
 }
