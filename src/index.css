@@ -14,7 +14,9 @@ body {
 
 
 .map-container {
-    padding: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    /* height: 50vh; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,6 +46,8 @@ body {
     /* height: 100vh; */
     padding-left: 16px;
     padding-right: 16px;
+    padding-bottom: 16px;
+    gap: 0px;
 }
 
 /* Chatbox styles */
