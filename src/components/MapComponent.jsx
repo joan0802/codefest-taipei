@@ -162,7 +162,7 @@ function MapComponent() {
 
               <button
                   onClick={applyFilter}
-                  className="mt-4 bg-blue-500 text-white rounded-md px-4 py-2"
+                  className="mt-4 bg-[#468D9B] text-white rounded-md px-4 py-2"
               >
                 Apply Filter
               </button>
@@ -187,7 +187,7 @@ function MapComponent() {
               />
               <button
                   onClick={handleSearch}
-                  className="bg-blue-500 text-white p-2 rounded-lg ml-2"
+                  className="bg-[#468D9B] text-white p-2 rounded-lg ml-2"
               >
                 搜尋
               </button>
@@ -238,6 +238,12 @@ function MapComponent() {
                   <p><strong className="font-bold">評分:</strong> {selectedPlace.score}</p>
                   <p><strong className="font-bold">區域:</strong> {selectedPlace.town}</p>
                   <p><strong className="font-bold">收費資訊:</strong> {selectedPlace.charge}</p>
+                  <button
+                      className="mt-4 p-2 bg-[#468D9B] text-white rounded"
+                      onClick={() => window.open(`https://www.google.com/maps?q=${selectedPlace.name}`, '_blank')}
+                  >
+                    在 Google Map 上查看
+                  </button>
                 </div>
               </InfoWindow>
             )}
