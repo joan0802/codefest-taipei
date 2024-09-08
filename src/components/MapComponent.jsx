@@ -164,7 +164,7 @@ function MapComponent() {
                   onClick={applyFilter}
                   className="mt-4 bg-[#468D9B] text-white rounded-md px-4 py-2"
               >
-                Apply Filter
+                搜尋
               </button>
             </div>
         )}
