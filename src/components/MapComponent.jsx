@@ -241,10 +241,19 @@ function MapComponent() {
                   <button
                       className="mt-4 p-2 bg-[#468D9B] text-white rounded"
                       onClick={() => {
-                        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                        const googleMapsUrl = isMobile
-                            ? `geo:${selectedPlace.lat},${selectedPlace.lng}?q=${encodeURIComponent(selectedPlace.name)}`
-                            : `https://www.google.com/maps?q=${selectedPlace.name}`;
+                        const isAndroid = /Android/i.test(navigator.userAgent);
+                        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+                        let googleMapsUrl;
+
+                        if (isAndroid) {
+                          googleMapsUrl = `intent://maps.google.com/maps?daddr=${selectedPlace.lat},${selectedPlace.lng}&q=${encodeURIComponent(selectedPlace.name)}#Intent;scheme=https;package=com.google.android.apps.maps;end`;
+                        } else if (isIOS) {
+                          googleMapsUrl = `https://maps.apple.com/?q=${selectedPlace.lat},${selectedPlace.lng}`;
+                        } else {
+                          googleMapsUrl = `https://www.google.com/maps?q=${selectedPlace.lat},${selectedPlace.lng}`;
+                        }
+
                         window.open(googleMapsUrl, '_blank');
                       }}
                   >
