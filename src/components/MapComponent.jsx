@@ -240,7 +240,13 @@ function MapComponent() {
                   <p><strong className="font-bold">收費資訊:</strong> {selectedPlace.charge}</p>
                   <button
                       className="mt-4 p-2 bg-[#468D9B] text-white rounded"
-                      onClick={() => window.open(`https://www.google.com/maps?q=${selectedPlace.name}`, '_blank')}
+                      onClick={() => {
+                        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                        const googleMapsUrl = isMobile
+                            ? `geo:${selectedPlace.lat},${selectedPlace.lng}?q=${encodeURIComponent(selectedPlace.name)}`
+                            : `https://www.google.com/maps?q=${selectedPlace.name}`;
+                        window.open(googleMapsUrl, '_blank');
+                      }}
                   >
                     在 Google Map 上查看
                   </button>
