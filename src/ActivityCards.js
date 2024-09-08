@@ -8,7 +8,9 @@ function ActivityCards({ refresh }) {
         const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/activities`, {
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "ngrok-skip-browser-warning": "true"
           }
         });
         const data = await response.json();
